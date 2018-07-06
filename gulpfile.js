@@ -6,7 +6,7 @@ var browserSync = require('browser-sync'); //Browser Sync simplifie le développ
 //la syntaxe de base d’une tâche gulp :
 gulp.task('sass', function() { 
     //gulp.src =  indique à la tâche gulp quels fichiers utiliser pour la tâche
-    return gulp.src('app/scss/style.scss')
+    return gulp.src('app/scss/**/*.scss') // ** = selectionne tout les dossiers enfants et * = selectionne tout les fichiers
     .pipe(sass()) // utilisation de gulp-sass
     //.pipe(plugins.cssbeautify({indent: ' '}))
     //.pipe(plugins.autoprefixer())
