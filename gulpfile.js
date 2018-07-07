@@ -1,7 +1,9 @@
 var gulp = require('gulp'); //La déclaration require indique à Node d’aller chercher dans node_modules un package appelé gulp.
 var sass = require('gulp-sass'); // pour compiler Sass en CSS avec Gulp, grâce à un plugin nommé gulp-sass. 
 var browserSync = require('browser-sync'); //Browser Sync simplifie le développement web en créant un serveur web nous permettant un rafraîchissement live et  la synchronisation sur plusieurs devices.
-
+var useref = require('gulp-useref')// concatène
+var minifyCSS = require('gulp-minify-css'); // minifie
+var del = require('del') // nettoie automatiquement les fichiers générés et devenus inutiles
 
 //la syntaxe de base d’une tâche gulp :
 gulp.task('sass', function() { 
@@ -37,6 +39,22 @@ gulp.task('browserSync', function() {
     })
 })
 
+gulp.task ('useref', function(){
+    var assets = useref.assets();
+  
+    return gulp.src('app/*.html')
+      .pipe(assets)
+      // Minifie seulement les fichiers CSS
+      .pipe(gulpIf('*.css', minifyCSS()))
+      // Minifie seulement les fichiers Javascript
+      .pipe(gulpIf('*.js', uglify()))
+      .pipe(assets.restore())
+      .pipe(useref())
+      .pipe(gulp.dest('dist'))
+  });
 
+  gulp.task('clean', function() {
+    del('dist'); // supprimera le dossier dist à chaque fois que l'on lance la task clean
+  })
 
 
