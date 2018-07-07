@@ -1,8 +1,6 @@
 var gulp = require('gulp'); //La déclaration require indique à Node d’aller chercher dans node_modules un package appelé gulp.
 var sass = require('gulp-sass'); // pour compiler Sass en CSS avec Gulp, grâce à un plugin nommé gulp-sass. 
 var browserSync = require('browser-sync'); //Browser Sync simplifie le développement web en créant un serveur web nous permettant un rafraîchissement live et  la synchronisation sur plusieurs devices.
-var useref = require('gulp-useref'); //gulp-useref permet de concaténer pour l'optimisation des fichiers
-var uglify = require('gulp-uglify'); //plugin gulp-uglify pour minifier 
 
 
 //la syntaxe de base d’une tâche gulp :
@@ -39,27 +37,6 @@ gulp.task('browserSync', function() {
     })
 })
 
-// Création d'une tâche Useref pour la concaténation
-gulp.task('useref', function(){ //apel de la fonction useref.asset() avant le gulp.src
-    var assets = useref.assets();
-
-    return gulp.src('app/*.html')
-    .pipe(assets)
-    .pipe(assets.restore())
-    .pipe(useref())
-    .pipe(gulp.dest('dist'))
-});
-
-gulp.task('useref', function(){
-    var assets = useref.assets();
-
-    return gulp.src('app/*.html')
-    .pipe(assets)
-    .pipe(uglify())// pour minifier les fichiers Javascript
-    .pipe(assets.restore())
-    .pipe(useref())
-    .pipe(gulp.dest('dist'))
-});
 
 
 
