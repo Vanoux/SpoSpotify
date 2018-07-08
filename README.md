@@ -1,2 +1,2 @@
 # SpoSpotify
-https://vanoux.github.io/SpoSpotify/. 
+https://vanoux.github.io/SpoSpotify/
